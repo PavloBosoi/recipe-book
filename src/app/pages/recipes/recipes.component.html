@@ -1,1 +1,13 @@
-<p>recipes works!</p>
+<div *ngFor="let recipe of recipes">
+    <img [src]="'../../../assets/images/' + recipe.imgName" [alt]="recipe.title"/>
+    <p>{{recipe.title}}</p>
+</div>
+
+<mat-paginator #paginator
+               [hidden]="false"
+               [pageSize]="pageSize"
+               [pageIndex]="pageIndex"
+               [length]="commonDataService.recipes.length"
+               [pageSizeOptions]="[2, 5, 10, 25]"
+               (page)="setRecipes($event)"
+></mat-paginator>

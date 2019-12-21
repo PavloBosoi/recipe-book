@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ROUTES } from './routes.constants';
-import { MainComponent } from './layouts/main/main.component';
 
 const routes: Routes = [
     {
@@ -11,11 +10,7 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: '',
-        component: MainComponent,
-        children: [
-            {path: ROUTES.RECIPES, loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesModule)}
-        ]
+        path: ROUTES.RECIPES, loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesModule)
     }
 ];
 

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
-import { RecipesRoutingModule } from './recipes-routing.module';
-import { RecipesComponent } from './recipes.component';
-import { RecipeDetailsModule } from '../recipe-details/recipe-details.module';
+import { RecipesComponent } from 'app/pages/recipes/recipes.component';
+import { RecipesRoutingModule } from 'app/pages/recipes/recipes-routing.module';
+import { RecipeDetailsModule } from 'app/pages/recipe-details/recipe-details.module';
 
 @NgModule({
     declarations: [
@@ -12,7 +13,8 @@ import { RecipeDetailsModule } from '../recipe-details/recipe-details.module';
     imports: [
         CommonModule,
         RecipesRoutingModule,
-        RecipeDetailsModule
+        RecipeDetailsModule,
+        MatPaginatorModule
     ]
 })
 export class RecipesModule { }
