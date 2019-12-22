@@ -1,5 +1,5 @@
 <div class="deep-page" *ngIf="currentRecipe">
-    <mat-toolbar class="recipe-title"><button [routerLink]="[ROUTES_SLASHED.RECIPES]" mat-icon-button><i class="material-icons">arrow_back</i></button>{{currentRecipe.title}}</mat-toolbar>
+    <mat-toolbar class="recipe-title"><button [routerLink]="[ROUTES_SLASHED.RECIPES]" mat-icon-button><i class="material-icons">arrow_back</i></button><span>{{currentRecipe.title}}</span></mat-toolbar>
 
     <mat-card class="recipe-details-card">
         <img mat-card-image [src]="'../../../assets/images/' + currentRecipe.imgName" [alt]="currentRecipe.title"/>

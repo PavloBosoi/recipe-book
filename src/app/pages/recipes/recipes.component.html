@@ -1,8 +1,8 @@
 <div class="deep-page">
-    <mat-toolbar>Recipes</mat-toolbar>
+    <mat-toolbar class="recipe-title"><span>Recipes</span></mat-toolbar>
 
     <div class="g-row g-wrap">
-        <div class="g-xl-4" *ngFor="let recipe of currentRecipes">
+        <div class="g-xl-4 g-md-6 g-xs-12" *ngFor="let recipe of currentRecipes">
             <a class="recipe-card" [routerLink]="[ROUTES_SLASHED.RECIPES, recipe.id]">
                 <mat-card>
                     <mat-card-header>
