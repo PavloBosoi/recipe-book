@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ROUTES } from './routes.constants';
+import { ROUTES } from 'app/routes.constants';
+import { RecipesResolver } from 'app/core/resolvers/recipes.resolver';
 
 const routes: Routes = [
     {
@@ -10,7 +11,8 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: ROUTES.RECIPES, loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesModule)
+        path: ROUTES.RECIPES, loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesModule),
+        resolve: {recipes: RecipesResolver}
     }
 ];
 

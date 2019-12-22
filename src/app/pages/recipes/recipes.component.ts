@@ -1,39 +1,57 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
-import { CommonDataService } from 'app/core/services/common-data.service';
-import { IRecipes } from 'app/core/domain/irecipes';
+import { IRecipe } from 'app/core/domain/IRecipe';
+import { ROUTES_SLASHED } from 'app/routes.constants';
+import { PaginationService } from 'app/core/services/pagination.service';
 
 @Component({
     selector: 'app-recipes',
     templateUrl: './recipes.component.html',
-    styleUrls: ['./recipes.component.scss']
+    styleUrls: ['./recipes.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecipesComponent implements OnInit {
-    public recipes: IRecipes[];
-    public readonly pageSize = 2;
-    public readonly pageIndex = 0;
+    public readonly ROUTES_SLASHED = ROUTES_SLASHED;
+
+    private recipes: IRecipe[] = this.route.snapshot.data['recipes'];
+    public currentRecipes: IRecipe[];
 
     @ViewChild(MatPaginator, {static: true})
     paginator: MatPaginator;
 
-    constructor(public commonDataService: CommonDataService) {}
+    constructor(
+        private route: ActivatedRoute,
+        public paginationService: PaginationService
+    ) {
+    }
 
     ngOnInit() {
         this.updatePaginatorValues();
     }
 
-    public setRecipes(event: PageEvent) {
+    public setRecipesAndPaginationValues(event: PageEvent) {
+        this.setPaginationValues(event);
+        this.setCurrentRecipes(event);
+    }
+
+    private setPaginationValues(event: PageEvent) {
+        this.paginationService.pageSize = event.pageSize;
+        this.paginationService.pageIndex = event.pageIndex;
+    }
+
+    private setCurrentRecipes(event: PageEvent) {
         const endPoint = event.pageSize * (event.pageIndex + 1);
         const startPoint = endPoint - event.pageSize;
-        this.recipes = this.commonDataService.recipes.slice(startPoint, endPoint);
+        this.currentRecipes = this.recipes.slice(startPoint, endPoint);
     }
 
     private updatePaginatorValues() {
         this.paginator.page.emit({
-            pageSize: this.pageSize,
-            pageIndex: this.pageIndex,
-            length: this.commonDataService.recipes.length
+            pageSize: this.paginationService.pageSize,
+            pageIndex: this.paginationService.pageIndex,
+            length: this.recipes.length
         });
     }
 }

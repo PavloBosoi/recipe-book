@@ -1,13 +1,26 @@
-<div *ngFor="let recipe of recipes">
-    <img [src]="'../../../assets/images/' + recipe.imgName" [alt]="recipe.title"/>
-    <p>{{recipe.title}}</p>
-</div>
+<div class="deep-page">
+    <mat-toolbar>Recipes</mat-toolbar>
 
-<mat-paginator #paginator
-               [hidden]="false"
-               [pageSize]="pageSize"
-               [pageIndex]="pageIndex"
-               [length]="commonDataService.recipes.length"
-               [pageSizeOptions]="[2, 5, 10, 25]"
-               (page)="setRecipes($event)"
-></mat-paginator>
+    <div class="g-row g-wrap">
+        <div class="g-xl-4" *ngFor="let recipe of currentRecipes">
+            <a class="recipe-card" [routerLink]="[ROUTES_SLASHED.RECIPES, recipe.id]">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>{{recipe.title}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image [src]="'../../../assets/images/' + recipe.imgName" [alt]="recipe.title"/>
+                </mat-card>
+            </a>
+        </div>
+    </div>
+
+    <mat-paginator #paginator
+                   [hidden]="false"
+                   [pageSize]="paginationService.pageSize"
+                   [pageIndex]="paginationService.pageIndex"
+                   [length]="recipes.length"
+                   [pageSizeOptions]="[3, 6, 9, 18, 36]"
+                   (page)="setRecipesAndPaginationValues($event)"
+    ></mat-paginator>
+
+</div>

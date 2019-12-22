@@ -1,9 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
-
+@import "assets/sccs/grid";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 html,
 body {
     height: 100%;
     background: #fff;
     font-weight: 400;
     color: #272828;
+}
+.deep-page{
+    padding: 20px 0;
+}
+.mat-toolbar{
+    margin: 0 0 20px;
+    justify-content: center;
+    text-transform: uppercase;
+}
+.recipe-card {
+    text-decoration: none;
+    .mat-card{
+        font-size: 0;
+        padding: 16px 16px 0 16px;
+        margin: 10px 0;
+    }
+    .mat-card-header{
+        justify-content: center;
+    }
+}
+.recipe-title{
+    position: relative;
+    .mat-icon-button{
+        position: absolute;
+        left: 40px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
